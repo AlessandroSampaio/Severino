@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Severino.Models;
 
 namespace Severino.Data
 {
@@ -12,5 +13,7 @@ namespace Severino.Data
             : base(options)
         {
         }
+
+        public DbSet<Requisicao> Requisicao { get; set; }
     }
 }

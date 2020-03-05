@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Severino.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Severino.Models;
 
 namespace Severino
 {
@@ -36,11 +37,12 @@ namespace Severino
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
+                builder => builder.MigrationsAssembly("Severino")));
+
+            services.AddIdentity<Usuario, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

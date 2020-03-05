@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Severino.Data;
 
 namespace Severino.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200305114142_Personalizacao_do_usuario")]
+    partial class Personalizacao_do_usuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,9 +71,6 @@ namespace Severino.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -110,8 +109,6 @@ namespace Severino.Data.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -179,49 +176,6 @@ namespace Severino.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Severino.Models.Requisicao", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AutorId");
-
-                    b.Property<DateTime>("DataFinal");
-
-                    b.Property<DateTime>("DataInicial");
-
-                    b.Property<string>("Detalhes");
-
-                    b.Property<int>("Status");
-
-                    b.Property<string>("Titulo");
-
-                    b.Property<double>("ValorRemuneracao");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AutorId");
-
-                    b.ToTable("Requisicao");
-                });
-
-            modelBuilder.Entity("Severino.Models.Usuario", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<double>("AvaliacaoContratante");
-
-                    b.Property<double>("AvaliacaoPrestador");
-
-                    b.Property<bool>("PrestadorDeServico");
-
-                    b.Property<long?>("RequisicaoId");
-
-                    b.HasIndex("RequisicaoId");
-
-                    b.HasDiscriminator().HasValue("Usuario");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -265,20 +219,6 @@ namespace Severino.Data.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Severino.Models.Requisicao", b =>
-                {
-                    b.HasOne("Severino.Models.Usuario", "Autor")
-                        .WithMany()
-                        .HasForeignKey("AutorId");
-                });
-
-            modelBuilder.Entity("Severino.Models.Usuario", b =>
-                {
-                    b.HasOne("Severino.Models.Requisicao")
-                        .WithMany("Candidatos")
-                        .HasForeignKey("RequisicaoId");
                 });
 #pragma warning restore 612, 618
         }
