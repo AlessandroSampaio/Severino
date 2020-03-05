@@ -1,6 +1,7 @@
 ﻿using Severino.Models.Enum;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Severino.Models
 {
@@ -13,6 +14,7 @@ namespace Severino.Models
         public DateTime DataInicial { get; set; }
         public DateTime DataFinal { get; set; }
         public Usuario Autor { get; set; }
+        [NotMapped]
         public List<Usuario> Candidatos { get; set; }
         public RequisicaoStatus Status { get; set; }
     }

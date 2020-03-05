@@ -13,7 +13,13 @@ namespace Severino.Data
             : base(options)
         {
         }
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RequisicaoReposta>()
+                .HasKey(i => new { i.RequisicaoId, i.UsuarioId });
+            base.OnModelCreating(modelBuilder);
+        }
         public DbSet<Requisicao> Requisicao { get; set; }
+        public DbSet<RequisicaoReposta> RequisicaoReposta { get; set; }
     }
 }
