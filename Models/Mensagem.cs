@@ -10,6 +10,7 @@ namespace Severino.Models
     {
         public int Id { get; set; }
         public Usuario Remetente { get; set; }
+        public Conversa conversa { get; set; }
         public string Texto { get; set; }
         public DateTime Data { get; set; }
         public MensagemStatus Status { get; set; }

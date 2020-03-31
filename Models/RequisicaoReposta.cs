@@ -4,11 +4,11 @@ namespace Severino.Models
 {
     public class RequisicaoReposta
     {
-        [NotMapped]
         public Requisicao Requisicao { get; set; }
-        public int RequisicaoId { get; set; }
         [NotMapped]
+        public int RequisicaoId { get; set; }
         public Usuario Usuario { get; set; }
+        [NotMapped]
         public int UsuarioId { get; set; }
 
     }

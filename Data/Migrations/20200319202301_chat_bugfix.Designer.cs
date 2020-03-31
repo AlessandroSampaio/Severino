@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Severino.Data;
 
 namespace Severino.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200319202301_chat_bugfix")]
+    partial class chat_bugfix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -255,15 +257,7 @@ namespace Severino.Data.Migrations
 
                     b.Property<int>("UsuarioId");
 
-                    b.Property<long?>("RequisicaoId1");
-
-                    b.Property<string>("UsuarioId1");
-
                     b.HasKey("RequisicaoId", "UsuarioId");
-
-                    b.HasIndex("RequisicaoId1");
-
-                    b.HasIndex("UsuarioId1");
 
                     b.ToTable("RequisicaoReposta");
                 });
@@ -353,17 +347,6 @@ namespace Severino.Data.Migrations
                     b.HasOne("Severino.Models.Usuario", "Autor")
                         .WithMany()
                         .HasForeignKey("AutorId");
-                });
-
-            modelBuilder.Entity("Severino.Models.RequisicaoReposta", b =>
-                {
-                    b.HasOne("Severino.Models.Requisicao", "Requisicao")
-                        .WithMany()
-                        .HasForeignKey("RequisicaoId1");
-
-                    b.HasOne("Severino.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId1");
                 });
 #pragma warning restore 612, 618
         }
